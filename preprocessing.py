@@ -35,17 +35,63 @@ except LookupError:
 # Kata-kata yang TIDAK dibuang meski ada di daftar stopword,
 # karena membawa informasi sentimen penting.
 _KATA_PENTING = {
+    # Kata negasi
     "tidak", "tak", "bukan", "belum",
     "jangan", "kurang", "ga", "gak",
     "enggak", "nggak", "ngga",
+
+    # Intensitas
     "sangat", "sekali", "banget",
     "amat", "terlalu", "cukup",
     "agak", "lebih", "paling",
+
+    # Penilaian umum
     "baik", "buruk", "bagus", "jelek",
     "enak", "lezat", "mantap", "nikmat",
+    "puas", "kecewa", "suka", "menyesal",
+
+    # Rasa makanan
+    "gurih", "asin", "manis", "pedas",
+    "pahit", "asam", "hambar", "tawar",
+    "sedap", "segar", "nikmat",
+    
+    # Kualitas makanan
+    "matang", "mentah", "hangat", "panas",
+    "dingin", "fresh", "berkualitas",
+    "porsi", "banyak", "sedikit",
+    
+    # Pelayanan
     "ramah", "cepat", "lambat",
-    "mahal", "murah", "bersih", "kotor",
-    "puas", "kecewa",
+    "pelayanan", "pelayan", "waiter",
+    "kasir", "sigap", "sopan",
+    "responsif", "menunggu", "tunggu",
+    "lama", "antri", "antre",
+    
+    # Harga
+    "mahal", "murah", "harga",
+    "terjangkau", "worth", "worthit",
+    "murahan",
+    
+    # Kebersihan
+    "bersih", "kotor", "higienis",
+    "higienis", "bau", "wangi",
+    
+    # Suasana/tempat
+    "nyaman", "tidaknyaman",
+    "luas", "sempit", "ramai",
+    "sepi", "berisik", "tenang",
+    "indah", "bagus", "jelek",
+    
+    # Fasilitas
+    "parkir", "toilet", "musala",
+    "wifi", "fasilitas", "tempat",
+    
+    # Pengalaman pelanggan
+    "recommended", "rekomendasi",
+    "rekomen", "favorit", "cocok",
+    "puas", "kecewa", "mengecewakan",
+    "memuaskan", "menyenangkan",
+    "menarik", "nyaman"
 }
 ALL_STOPWORDS = _all_stopwords - _KATA_PENTING
 
