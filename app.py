@@ -20,7 +20,7 @@ st.set_page_config(
 DATA_DIR = "data"
 
 # =============================================================
-# CUSTOM THEME / CSS (FIXED FOR LATEST STREAMLIT)
+# CUSTOM THEME / CSS (FORCE LIGHT MODE & FIX TEXT VISIBILITY)
 # =============================================================
 st.markdown(
     """
@@ -38,20 +38,32 @@ st.markdown(
             --negative: #c0392b;
         }
 
-        /* Background utama */
+        /* Force main app background */
         .stApp {
-            background-color: var(--bg-soft);
+            background-color: var(--bg-soft) !important;
+            color: var(--text) !important;
         }
 
-        /* Sembunyikan menu & footer bawaan Streamlit */
+        /* Hide default streamlit chrome noise */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
-        header[data-testid="stHeader"] {background: transparent;}
-
-        /* Sidebar styling */
+        header[data-testid="stHeader"] {background: transparent !important;}
+        
+        /* Force ALL text in sidebar to be dark (Fixes invisible navbar) */
         section[data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #ffffff 0%, #fdf6f2 100%);
-            border-right: 1px solid var(--border);
+            background: linear-gradient(180deg, #ffffff 0%, #fdf6f2 100%) !important;
+            color: var(--text) !important;
+        }
+        section[data-testid="stSidebar"] * {
+            color: var(--text) !important;
+        }
+        
+        /* Fix radio button (navbar) text visibility */
+        div[role="radiogroup"] label {
+            color: var(--text) !important;
+        }
+        div[role="radiogroup"] label:hover {
+            color: var(--primary) !important;
         }
 
         /* Typography */
@@ -85,7 +97,7 @@ st.markdown(
             width: 34px; height: 34px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff;
+            color: #fff !important;
             font-weight: 800;
             font-size: 15px;
             margin-bottom: 10px;
@@ -144,7 +156,7 @@ st.markdown(
         }
         .result-emoji { font-size: 44px; }
 
-        /* Buttons (Fix untuk versi baru) */
+        /* Buttons */
         .stButton > button, div.stButton > button:first-child {
             border-radius: 10px !important;
             font-weight: 600 !important;
@@ -160,7 +172,7 @@ st.markdown(
             box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
         }
 
-        /* Tabs (Fix untuk versi baru) */
+        /* Tabs */
         .stTabs [data-baseweb="tab-list"] { gap: 8px; }
         .stTabs [data-baseweb="tab"] {
             border-radius: 10px 10px 0 0;
@@ -168,15 +180,11 @@ st.markdown(
             background: #fff !important;
             border: 1px solid var(--border) !important;
             font-weight: 600 !important;
+            color: var(--text) !important;
         }
         .stTabs [aria-selected="true"] {
             background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
             color: #fff !important;
-        }
-
-        /* Code block */
-        .stCodeBlock, pre {
-            border-radius: 10px !important;
         }
 
         /* Empty state */
@@ -238,10 +246,10 @@ with st.sidebar:
         """
         <div style="text-align:center; padding:14px 0 8px;">
             <div style="font-size:46px;">🍛</div>
-            <div style="font-size:20px; font-weight:800; color:var(--text); margin-top:6px;">
+            <div style="font-size:20px; font-weight:800; color:#2c3e50; margin-top:6px;">
                 Pawon Mbah Gito
             </div>
-            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+            <div style="font-size:12px; color:#7f8c8d; margin-top:2px;">
                 Sistem Klasifikasi Sentimen
             </div>
         </div>
@@ -257,7 +265,7 @@ with st.sidebar:
     st.markdown(
         """
         <hr style="border:none; border-top:1px solid var(--border); margin:16px 0;" />
-        <div style="font-size:11px; color:var(--text-muted); line-height:1.7;">
+        <div style="font-size:11px; color:#7f8c8d; line-height:1.7;">
             <div><b>Model</b>: Linear SVM + SMOTE</div>
             <div><b>Pembobotan</b>: TF-IDF</div>
             <div><b>Split</b>: 80:20</div>
