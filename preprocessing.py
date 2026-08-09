@@ -16,6 +16,8 @@ import os
 import re
 
 import nltk
+nltk.download('stopwords') # Jika pakai NLTK
+nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
