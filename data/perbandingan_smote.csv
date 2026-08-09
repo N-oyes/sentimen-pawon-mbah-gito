@@ -1,0 +1,5 @@
+label,jumlah,kondisi
+Negatif,230,Sebelum SMOTE
+Positif,1955,Sebelum SMOTE
+Negatif,1955,Sesudah SMOTE
+Positif,1955,Sesudah SMOTE
