@@ -20,7 +20,7 @@ st.set_page_config(
 DATA_DIR = "data"
 
 # =============================================================
-# CUSTOM THEME / CSS
+# CUSTOM THEME / CSS (FIXED FOR LATEST STREAMLIT)
 # =============================================================
 st.markdown(
     """
@@ -38,20 +38,23 @@ st.markdown(
             --negative: #c0392b;
         }
 
+        /* Background utama */
         .stApp {
             background-color: var(--bg-soft);
         }
 
-        /* Hide default streamlit chrome noise */
-        #MainMenu, footer, header {visibility: hidden;}
-        .stApp > header {background: transparent;}
+        /* Sembunyikan menu & footer bawaan Streamlit */
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header[data-testid="stHeader"] {background: transparent;}
 
+        /* Sidebar styling */
         section[data-testid="stSidebar"] {
             background: linear-gradient(180deg, #ffffff 0%, #fdf6f2 100%);
             border-right: 1px solid var(--border);
         }
 
-        /* Titles */
+        /* Typography */
         h1, h2, h3, h4 {
             color: var(--text) !important;
             font-weight: 700 !important;
@@ -60,7 +63,7 @@ st.markdown(
         h1 { font-size: 2.1rem !important; }
         h2 { font-size: 1.6rem !important; }
 
-        /* Step card */
+        /* Step card (Beranda) */
         .step-card {
             background: #fff;
             border: 1px solid var(--border);
@@ -90,7 +93,7 @@ st.markdown(
         .step-title { font-weight: 700; color: var(--text); font-size: 15px; }
         .step-desc  { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
 
-        /* Metric */
+        /* Metric Card Custom */
         .metric-card {
             background: #fff;
             border: 1px solid var(--border);
@@ -119,7 +122,7 @@ st.markdown(
             box-shadow: 0 2px 10px rgba(192, 57, 43, 0.05);
         }
 
-        /* Result badge */
+        /* Result badge (Analisis Sentimen) */
         .result-badge {
             display: flex;
             align-items: center;
@@ -141,29 +144,30 @@ st.markdown(
         }
         .result-emoji { font-size: 44px; }
 
-        /* Sidebar nav */
-        .nav-radio label { font-weight: 500; }
-
-        /* Buttons */
-        .stButton > button {
-            border-radius: 10px;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            padding: 10px 22px;
+        /* Buttons (Fix untuk versi baru) */
+        .stButton > button, div.stButton > button:first-child {
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 10px 22px !important;
+            transition: all 0.3s ease !important;
         }
         .stButton > button:hover {
-            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            background: linear-gradient(135deg, var(--primary-light), var(--accent)) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
         }
 
-        /* Tabs */
+        /* Tabs (Fix untuk versi baru) */
         .stTabs [data-baseweb="tab-list"] { gap: 8px; }
         .stTabs [data-baseweb="tab"] {
             border-radius: 10px 10px 0 0;
-            padding: 10px 18px;
-            background: #fff;
-            border: 1px solid var(--border);
-            font-weight: 600;
+            padding: 10px 18px !important;
+            background: #fff !important;
+            border: 1px solid var(--border) !important;
+            font-weight: 600 !important;
         }
         .stTabs [aria-selected="true"] {
             background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
@@ -173,11 +177,6 @@ st.markdown(
         /* Code block */
         .stCodeBlock, pre {
             border-radius: 10px !important;
-        }
-
-        /* Caption muted */
-        .stCaption, .st-emphasis-caption {
-            color: var(--text-muted) !important;
         }
 
         /* Empty state */
@@ -190,18 +189,6 @@ st.markdown(
             color: var(--text-muted);
             font-size: 14px;
         }
-
-        /* Sentiment preview chips */
-        .chip {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 6px;
-        }
-        .chip-pos { background: #e8f8ee; color: #1e8449; }
-        .chip-neg { background: #fdecea; color: #922b21; }
     </style>
     """,
     unsafe_allow_html=True,
