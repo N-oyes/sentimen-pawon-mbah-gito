@@ -13,7 +13,6 @@ from preprocessing import preprocess_text_for_prediction
 # =============================================================
 st.set_page_config(
     page_title="Klasifikasi Sentimen - Pawon Mbah Gito",
-    page_icon="🍛",
     layout="wide",
 )
 
@@ -143,6 +142,7 @@ st.markdown(
             border-radius: 16px;
             font-size: 22px;
             font-weight: 800;
+            justify-content: center;
         }
         .result-positive {
             background: linear-gradient(135deg, #e8f8ee, #d4f0dd);
@@ -154,7 +154,6 @@ st.markdown(
             color: #922b21;
             border: 1px solid #f0b5ad;
         }
-        .result-emoji { font-size: 44px; }
 
         /* Buttons */
         .stButton > button, div.stButton > button:first-child {
@@ -245,7 +244,6 @@ with st.sidebar:
     st.markdown(
         """
         <div style="text-align:center; padding:14px 0 8px;">
-            <div style="font-size:46px;">🍛</div>
             <div style="font-size:20px; font-weight:800; color:#2c3e50; margin-top:6px;">
                 Pawon Mbah Gito
             </div>
@@ -259,7 +257,7 @@ with st.sidebar:
     )
     page = st.radio(
         "Navigasi",
-        ["🏠 Beranda", "⚙️ Sistem", "📊 Visualisasi", "🔍 Analisis Sentimen"],
+        ["Beranda", "Sistem", "Visualisasi", "Analisis Sentimen"],
         label_visibility="collapsed",
     )
     st.markdown(
@@ -278,8 +276,8 @@ with st.sidebar:
 # =============================================================
 # PAGE 1 — BERANDA
 # =============================================================
-if page == "🏠 Beranda":
-    st.markdown("# 🍛 Klasifikasi Sentimen Ulasan Pawon Mbah Gito")
+if page == "Beranda":
+    st.markdown("# Klasifikasi Sentimen Ulasan Pawon Mbah Gito")
     st.caption("Analisis sentimen ulasan pelanggan menggunakan pendekatan Machine Learning")
 
     st.markdown(
@@ -295,7 +293,7 @@ if page == "🏠 Beranda":
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
     # Pipeline steps
-    st.markdown("### 🔄 Alur Sistem")
+    st.markdown("### Alur Sistem")
     steps = [
         ("1", "Scraping Data", "Mengumpulkan 2.755 ulasan Google Reviews beserta rating."),
         ("2", "Preprocessing", "Case folding, cleansing, tokenizing, normalisasi slang, stopword, stemming."),
@@ -323,7 +321,7 @@ if page == "🏠 Beranda":
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
     # Dataset summary
-    st.markdown("### 📦 Ringkasan Dataset")
+    st.markdown("### Ringkasan Dataset")
     summary_df = load_csv_safe("dataset_summary.csv")
     c1, c2, c3, c4 = st.columns(4)
     if summary_df is not None:
@@ -341,10 +339,10 @@ if page == "🏠 Beranda":
     st.markdown(
         """
         ---
-        ### 🧭 Jelajahi Sistem
-        - **⚙️ Sistem** — lihat tahapan pemrosesan data secara detail
-        - **📊 Visualisasi** — perbandingan performa antar model
-        - **🔍 Analisis Sentimen** — uji klasifikasi pada ulasan apapun
+        ### Jelajahi Sistem
+        - **Sistem** — lihat tahapan pemrosesan data secara detail
+        - **Visualisasi** — perbandingan performa antar model
+        - **Analisis Sentimen** — uji klasifikasi pada ulasan apapun
         """
     )
 
@@ -352,25 +350,25 @@ if page == "🏠 Beranda":
 # =============================================================
 # PAGE 2 — SISTEM
 # =============================================================
-elif page == "⚙️ Sistem":
-    st.markdown("## ⚙️ Sistem: Alur Pemrosesan Data")
+elif page == "Sistem":
+    st.markdown("## Sistem: Alur Pemrosesan Data")
     st.caption("Tahapan dari data mentah hingga evaluasi model")
 
     tabs = st.tabs([
-        "1️⃣ Scraping",
-        "2️⃣ Preprocessing",
-        "3️⃣ Pelabelan",
-        "4️⃣ TF-IDF",
-        "5️⃣ Splitting",
-        "6️⃣ SMOTE",
-        "7️⃣ Model SVM",
-        "8️⃣ Evaluasi",
+        "1. Scraping",
+        "2. Preprocessing",
+        "3. Pelabelan",
+        "4. TF-IDF",
+        "5. Splitting",
+        "6. SMOTE",
+        "7. Model SVM",
+        "8. Evaluasi",
     ])
 
     # 1. Scraping
     with tabs[0]:
         with st.container():
-            st.markdown("#### 📥 Scraping Data")
+            st.markdown("#### Scraping Data")
             st.write("Dataset `datasetpawon.csv` berisi **2.755 ulasan** pelanggan beserta rating (1–5).")
             df_scrap = load_csv_safe("hasil_scraping.csv")
             if df_scrap is not None:
@@ -380,7 +378,7 @@ elif page == "⚙️ Sistem":
 
     # 2. Preprocessing
     with tabs[1]:
-        st.markdown("#### 🧹 Preprocessing Teks")
+        st.markdown("#### Preprocessing Teks")
         st.markdown(
             """
             <div class="pipe-card">
@@ -401,7 +399,7 @@ elif page == "⚙️ Sistem":
             unsafe_allow_html=True,
         )
 
-        st.markdown("#### 🧪 Coba Langsung")
+        st.markdown("#### Uji Coba Langsung")
         sample_text = st.text_input("Masukkan contoh teks:", "Makanannya gk EnAk, tp pelayanan lama bgt")
         if sample_text:
             result = preprocess_text_for_prediction(sample_text)
@@ -415,7 +413,7 @@ elif page == "⚙️ Sistem":
 
     # 3. Pelabelan
     with tabs[2]:
-        st.markdown("#### 🏷️ Pelabelan Sentimen")
+        st.markdown("#### Pelabelan Sentimen")
         st.write("Label ditentukan otomatis dari rating:")
         st.code("rating >= 4  ->  Positif (1)\nrating <= 3  ->  Negatif (0)", language="text")
 
@@ -443,7 +441,7 @@ elif page == "⚙️ Sistem":
 
     # 4. TF-IDF
     with tabs[3]:
-        st.markdown("#### 📊 Pembobotan Fitur TF-IDF")
+        st.markdown("#### Pembobotan Fitur TF-IDF")
         st.write(
             "TF-IDF mengubah teks hasil preprocessing menjadi representasi numerik "
             "berdasarkan kepentingan kata dalam dokumen relatif terhadap seluruh korpus."
@@ -472,7 +470,7 @@ elif page == "⚙️ Sistem":
         except Exception as e:
             st.warning(f"Tidak bisa memuat `tfidf.pkl`: {e}")
 
-        st.markdown("#### 🔝 10 Kata dengan Bobot TF-IDF Tertinggi")
+        st.markdown("#### 10 Kata dengan Bobot TF-IDF Tertinggi")
         top_words = pd.DataFrame({
             "Kata": ["makan", "enak", "nyaman", "bagus", "makan enak", "sekali", "suasana", "tempat", "tidak", "menu"],
             "Bobot TF-IDF": [0.0546, 0.0529, 0.0369, 0.0282, 0.0265, 0.0265, 0.0264, 0.0255, 0.0245, 0.0239],
@@ -488,7 +486,7 @@ elif page == "⚙️ Sistem":
 
     # 5. Splitting
     with tabs[4]:
-        st.markdown("#### ✂️ Splitting Data")
+        st.markdown("#### Splitting Data")
         st.write(
             "Data dibagi menjadi latih & uji dengan **3 rasio berbeda** "
             "(`train_test_split`, `stratify=y`, `random_state=42`)."
@@ -511,7 +509,7 @@ elif page == "⚙️ Sistem":
 
     # 6. SMOTE
     with tabs[5]:
-        st.markdown("#### ⚖️ SMOTE")
+        st.markdown("#### SMOTE")
         st.write(
             "SMOTE **hanya diterapkan pada data latih** untuk menyeimbangkan kelas Positif & Negatif "
             "dengan membuat data sintetis pada kelas minoritas (Negatif)."
@@ -531,7 +529,7 @@ elif page == "⚙️ Sistem":
 
     # 7. Model SVM
     with tabs[6]:
-        st.markdown("#### 🤖 Model Klasifikasi SVM")
+        st.markdown("#### Model Klasifikasi SVM")
         st.write(
             "Model final: **Linear SVM** (`sklearn.svm.LinearSVC`) — cocok untuk data teks "
             "berdimensi tinggi hasil TF-IDF. Notebook juga membandingkan Naive Bayes, KNN, "
@@ -554,7 +552,7 @@ elif page == "⚙️ Sistem":
 
     # 8. Evaluasi
     with tabs[7]:
-        st.markdown("#### 📈 Evaluasi Model")
+        st.markdown("#### Evaluasi Model")
         df_eval = load_csv_safe("evaluasi_model.csv")
         if df_eval is not None:
             st.dataframe(df_eval, use_container_width=True, hide_index=True)
@@ -565,14 +563,14 @@ elif page == "⚙️ Sistem":
 # =============================================================
 # PAGE 3 — VISUALISASI
 # =============================================================
-elif page == "📊 Visualisasi":
-    st.markdown("## 📊 Visualisasi Performa Model")
+elif page == "Visualisasi":
+    st.markdown("## Visualisasi Performa Model")
     st.caption("Perbandingan antar model & hasil evaluasi model terpilih")
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
     # Perbandingan model
-    st.markdown("### 🏆 Perbandingan Performa Model")
+    st.markdown("### Perbandingan Performa Model")
     st.caption("5 algoritma, dengan & tanpa SMOTE — split 80:20 (data uji = 547 ulasan)")
 
     df_compare = load_csv_safe("perbandingan_model.csv")
@@ -596,7 +594,7 @@ elif page == "📊 Visualisasi":
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
     # Tabel evaluasi
-    st.markdown("### 📋 Tabel Hasil Evaluasi")
+    st.markdown("### Tabel Hasil Evaluasi")
     df_eval2 = load_csv_safe("evaluasi_model.csv")
     if df_eval2 is not None:
         st.dataframe(df_eval2, use_container_width=True, hide_index=True)
@@ -606,7 +604,7 @@ elif page == "📊 Visualisasi":
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
     # Confusion matrix
-    st.markdown("### 🔲 Confusion Matrix")
+    st.markdown("### Confusion Matrix")
     df_cm = load_csv_safe("confusion_matrix.csv")
     if df_cm is not None and {"actual", "predicted", "jumlah"}.issubset(df_cm.columns):
         pivot = df_cm.pivot(index="actual", columns="predicted", values="jumlah")
@@ -628,8 +626,8 @@ elif page == "📊 Visualisasi":
 # =============================================================
 # PAGE 4 — ANALISIS SENTIMEN
 # =============================================================
-elif page == "🔍 Analisis Sentimen":
-    st.markdown("## 🔍 Analisis Sentimen Ulasan")
+elif page == "Analisis Sentimen":
+    st.markdown("## Analisis Sentimen Ulasan")
     st.caption("Klasifikasikan sentimen dari ulasan apapun secara langsung")
 
     try:
@@ -641,16 +639,16 @@ elif page == "🔍 Analisis Sentimen":
     col1, col2 = st.columns(2, gap="large")
 
     with col1:
-        st.markdown("### ✍️ Input Ulasan")
+        st.markdown("### Input Ulasan")
         text = st.text_area(
             "Masukkan teks ulasan:",
             height=220,
             placeholder="Contoh: Makanannya enak banget, pelayanan ramah, harga terjangkau...",
         )
-        run = st.button("🚀 Analisis Sentimen", type="primary", use_container_width=True)
+        run = st.button("Analisis Sentimen", type="primary", use_container_width=True)
 
     with col2:
-        st.markdown("### 📤 Hasil Analisis")
+        st.markdown("### Hasil Analisis")
 
         if run and text.strip():
             clean_text = preprocess_text_for_prediction(text)
@@ -667,7 +665,6 @@ elif page == "🔍 Analisis Sentimen":
                 st.markdown(
                     """
                     <div class="result-badge result-positive">
-                        <div class="result-emoji">😊</div>
                         <div>POSITIF</div>
                     </div>
                     """,
@@ -677,7 +674,6 @@ elif page == "🔍 Analisis Sentimen":
                 st.markdown(
                     """
                     <div class="result-badge result-negative">
-                        <div class="result-emoji">😞</div>
                         <div>NEGATIF</div>
                     </div>
                     """,
