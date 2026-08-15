@@ -6,8 +6,8 @@ Tahapan preprocessing:
 2. Cleansing
 3. Tokenizing
 4. Normalisasi Slang
-5. Stopword Removal
-6. Negation Handling
+5. Negation Handling
+6. Stopword Removal
 7. Stemming
 8. Join token -> string siap untuk TF-IDF
 """
@@ -279,14 +279,17 @@ def preprocess_text_for_prediction(text):
     # 4. Normalisasi Slang
     normalized_text = normalisasi(tokenized_text)
 
-    # 5. Stopword Removal
-    no_stopword_text = remove_stopwords(normalized_text)
+    # 5. Negation Handling
+    #    Dilakukan sebelum stopword removal agar kata yang
+    #    dilekatkan pada negasi (mis. "tidak" + kata berikutnya)
+    #    tidak ikut terbuang sebagai stopword.
+    negation_text = handle_negation(normalized_text)
 
-    # 6. Negation Handling
-    negation_text = handle_negation(no_stopword_text)
+    # 6. Stopword Removal
+    no_stopword_text = remove_stopwords(negation_text)
 
     # 7. Stemming
-    stemmed_text = stem_tokens(negation_text)
+    stemmed_text = stem_tokens(no_stopword_text)
 
     # 8. Gabungkan token untuk TF-IDF
     text_result = join_text(stemmed_text)
